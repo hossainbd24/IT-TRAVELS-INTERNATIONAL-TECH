@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>আইটি ট্রাভেলস্  ইন্টারন্যাশনাল ম্যানেজমেন্ট সিস্টেম</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --green: #1a7a4a;
+    --green-light: #e8f5ee;
+    --green-mid: #2ea865;
+    --red: #c0392b;
+    --red-light: #fdf0ee;
+    --gold: #c8902a;
+    --gold-light: #fff8e6;
+    --blue: #1565c0;
+    --blue-light: #e3f0ff;
+    --bg: #f0f4f0;
+    --card: #ffffff;
+    --border: #d4e0d8;
+    --text: #1a2e1a;
+    --muted: #5a6e5a;
+    --shadow: 0 2px 12px rgba(26,122,74,0.08);
+    --shadow-lg: 0 8px 32px rgba(26,122,74,0.14);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'Hind Siliguri', 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== LOGIN SCREEN ===== */
+  #login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a4a2a 0%, #1a7a4a 50%, #0d5c35 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #login-screen::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .login-card {
+    background: white;
+    border-radius: 20px;
+    padding: 48px 40px;
+    width: 420px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 1;
+  }
+
+  .login-logo {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .login-logo .flag-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a7a4a, #2ea865);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+    box-shadow: 0 4px 16px rgba(26,122,74,0.3);
+  }
+
+  .login-logo h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1.3;
+  }
+
+  .login-logo p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .role-tabs {
+    display: flex;
+    background: #f0f4f0;
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+  }
+
+  .role-tab {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .role-tab.active {
+    background: white;
+    color: var(--green);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-family: 'Hind Siliguri', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+    background: #fafcfa;
+  }
+
+  .form-group input:focus {
+    border-color: var(--green);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(26,122,74,0.1);
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #1a7a4a, #2ea865);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Hind Siliguri', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+
+  .login-btn:hover {
+    background: linear-gradient(135deg, #0d5c35, #1a7a4a);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(26,122,74,0.3);
+  }
+
+  .demo-hint {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  .demo-hint span {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ===== MAIN APP ===== */
+  #app { display: none; min-height: 100vh; }
+
+  /* TOPBAR */
+  .topbar {
+    background: linear-gradient(90deg, #0a4a2a, #1a7a4a);
+    color: white;
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topbar-logo {
+    font-size: 22px;
+  }
+
+  .topbar-title { font-size: 16px; font-weight: 600; }
+  .topbar-sub { font-size: 11px; opacity: 0.7; }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .role-badge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .role-badge.admin { background: rgba(255,215,0,0.25); color: #ffd700; border: 1px solid rgba(255,215,0,0.4); }
+  .role-badge.user { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+  .logout-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Hind Siliguri', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .logout-btn:hover { background: rgba(255,255,255,0.25); }
+
+  /* LAYOUT */
+  .app-layout { display: flex; min-height: calc(100vh - 60px); }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 230px;
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 16px 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+
+  .sidebar-section {
+    margin-bottom: 8px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    padding: 12px 20px 6px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--muted);
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .nav-item:hover { background: var(--green-light); color: var(--green); }
+  
+  .nav-item.active {
+    background: var(--green-light);
+    color: var(--green);
+    border-left-color: var(--green);
+    font-weight: 600;
+  }
+
+  .nav-icon { font-size: 17px; flex-shrink: 0; }
+
+  /* MAIN CONTENT */
+  .main-content { flex: 1; padding: 24px; overflow-y: auto; }
+
+  /* SECTION MANAGEMENT */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* PAGE HEADER */
+  .page-header {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .page-title { font-size: 22px; font-weight: 700; color: var(--text); }
+  .page-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+
+  .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+  .stat-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .stat-card.green { border-top: 3px solid var(--green-mid); }
+  .stat-card.gold { border-top: 3px solid var(--gold); }
+  .stat-card.blue { border-top: 3px solid var(--blue); }
+  .stat-card.red { border-top: 3px solid var(--red); }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .card-body { padding: 20px; }
+
+  /* TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  .data-table th {
+    background: #f5f8f5;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f0f4f0;
+    color: var(--text);
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: #fafcfa; }
+
+  /* BADGE / STATUS */
+  .badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .badge-pending { background: #fff8e6; color: #a07000; }
+  .badge-active { background: #e8f5ee; color: #1a7a4a; }
+  .badge-done { background: #e3f0ff; color: #1565c0; }
+  .badge-reject { background: #fdf0ee; color: #c0392b; }
+
+  /* BUTTONS */
+  .btn {
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Hind Siliguri', sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary { background: var(--green); color: white; }
+  .btn-primary:hover { background: #0d5c35; }
+  .btn-outline { background: white; color: var(--green); border: 1.5px solid var(--green); }
+  .btn-outline:hover { background: var(--green-light); }
+  .btn-danger { background: var(--red-light); color: var(--red); border: 1px solid #f5c6c0; }
+  .btn-sm { padding: 5px 12px; font-size: 12px; }
+
+  /* FORM STYLES */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-field {
+    margin-bottom: 16px;
+  }
+
+  .form-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-family: 'Hind Siliguri', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fafcfa;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(26,122,74,0.1);
+    background: white;
+  }
+
+  /* INFO BOXES */
+  .info-box {
+    background: var(--blue-light);
+    border: 1px solid #b3d4f5;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+
+  .warning-box {
+    background: var(--gold-light);
+    border: 1px solid #f5d78e;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  /* STATUS TRACKER */
+  .tracker {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .tracker-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+
+  .tracker-step::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+  }
+
+  .tracker-step:last-child::before { display: none; }
+  .tracker-step.done::before { background: var(--green-mid); }
+
+  .tracker-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+    font-weight: 700;
+    color: white;
+    font-size: 13px;
+  }
+
+  .tracker-step.done .tracker-dot { background: var(--green-mid); }
+  .tracker-step.active .tracker-dot { background: var(--gold); box-shadow: 0 0 0 4px rgba(200,144,42,0.2); }
+
+  .tracker-label { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .tracker-step.done .tracker-label,
+  .tracker-step.active .tracker-label { color: var(--text); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .sidebar { width: 200px; }
+    .form-row { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== LOGIN SCREEN ========== -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="flag-icon">🇧🇩</div>
+      <h1>পাসপোর্ট সার্ভিস সিস্টেম</h1>
+      <p>Passport & Document Management</p>
+    </div>
+
+    <div class="role-tabs">
+      <button class="role-tab active" onclick="switchRole('admin')">🛡️ Admin</button>
+      <button class="role-tab" onclick="switchRole('user')">👤 User</button>
+    </div>
+
+    <div class="form-group">
+      <label>ইউজারনেম / Username</label>
+      <input type="text" id="username" placeholder="আপনার ইউজারনেম লিখুন..." value="admin">
+    </div>
+    <div class="form-group">
+      <label>পাসওয়ার্ড / Password</label>
+      <input type="password" id="password" placeholder="••••••••" value="admin123">
+    </div>
+
+    <button class="login-btn" onclick="doLogin()">🔐 লগইন করুন</button>
+
+    <div class="demo-hint">
+      Admin: <span>admin / admin123</span> &nbsp;|&nbsp; User: <span>user / user123</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MAIN APP ========== -->
+<div id="app">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div style="font-size:24px">🇧🇩</div>
+      <div>
+        <div class="topbar-title">পাসপোর্ট সার্ভিস সিস্টেম</div>
+        <div class="topbar-sub" id="topbar-sub">Passport & Document Management</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="role-badge" id="role-badge">ADMIN</span>
+      <div class="user-avatar" id="user-avatar">A</div>
+      <button class="logout-btn" onclick="logout()">বের হন ↩</button>
+    </div>
+  </div>
+
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <!-- Filled by JS -->
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-content">
+
+      <!-- ====== ADMIN SECTIONS ====== -->
+
+      <!-- Dashboard -->
+      <div class="section" id="sec-dashboard">
+        <div class="page-header">
+          <div>
+            <div class="page-title">📊 ড্যাশবোর্ড</div>
+            <div class="page-sub">সামগ্রিক পরিসংখ্যান ও কার্যক্রম</div>
+          </div>
+          <button class="btn btn-primary">+ নতুন এন্ট্রি</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card green">
+            <div class="stat-icon">📋</div>
+            <div class="stat-num">1,247</div>
+            <div class="stat-label">মোট পাসপোর্ট আবেদন</div>
+          </div>
+          <div class="stat-card gold">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-num">89</div>
+            <div class="stat-label">প্রক্রিয়াধীন</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon">✅</div>
+            <div class="stat-num">1,108</div>
+            <div class="stat-label">সম্পন্ন</div>
+          </div>
+          <div class="stat-card red">
+            <div class="stat-icon">🪪</div>
+            <div class="stat-num">342</div>
+            <div class="stat-label">NID আবেদন</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon">🚗</div>
+            <div class="stat-num">156</div>
+            <div class="stat-label">ড্রাইভিং লাইসেন্স</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-icon">💰</div>
+            <div class="stat-num">৳ ৪.২ লাখ</div>
+            <div class="stat-label">মাসিক আয়</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">🕐 সাম্প্রতিক আবেদন</span>
+              <button class="btn btn-outline btn-sm" onclick="showSection('sec-applications')">সব দেখুন</button>
+            </div>
+            <div class="card-body" style="padding:0">
+              <table class="data-table">
+                <thead>
+                  <tr><th>সিরিয়াল</th><th>নাম</th><th>ধরন</th><th>অবস্থা</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>2818</td><td>করিম মিয়া</td><td>নিয়মিত</td><td><span class="badge badge-pending">প্রক্রিয়াধীন</span></td></tr>
+                  <tr><td>2817</td><td>রহিমা বেগম</td><td>এক্সপ্রেস</td><td><span class="badge badge-active">সম্পন্ন</span></td></tr>
+                  <tr><td>2816</td><td>আব্দুল হক</td><td>সুপার</td><td><span class="badge badge-done">ডেলিভারি</span></td></tr>
+                  <tr><td>2814</td><td>সালমা খানম</td><td>নিয়মিত</td><td><span class="badge badge-pending">অপেক্ষমান</span></td></tr>
+                  <tr><td>2813</td><td>মোস্তফা আলী</td><td>রিইস্যু</td><td><span class="badge badge-active">প্রক্রিয়াধীন</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">💵 ফি কাঠামো</span>
+            </div>
+            <div class="card-body">
+              <div style="font-size:13px; color:var(--muted); font-weight:700; margin-bottom:10px">৫ বছর • ৪৮ পৃষ্ঠা</div>
+              <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:14px">
+                <span>নিয়মিত ডেলিভারি</span><strong>৳ ৪,০২৫</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:14px">
+                <span>এক্সপ্রেস ডেলিভারি</span><strong>৳ ৬,৩২৫</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px">
+                <span>সুপার এক্সপ্রেস</span><strong>৳ ৮,৬২৫</strong>
+              </div>
+
+              <div style="font-size:13px; color:var(--muted); font-weight:700; margin:14px 0 10px">১০ বছর • ৪৮ পৃষ্ঠা</div>
+              <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:14px">
+                <span>নিয়মিত ডেলিভারি</span><strong>৳ ৫,৭৫০</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px">
+                <span>এক্সপ্রেস ডেলিভারি</span><strong>৳ ৮,০৫০</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Applications -->
+      <div class="section" id="sec-applications">
+        <div class="page-header">
+          <div>
+            <div class="page-title">📋 পাসপোর্ট আবেদন</div>
+            <div class="page-sub">সকল আবেদনের তালিকা ও ব্যবস্থাপনা</div>
+          </div>
+          <button class="btn btn-primary" onclick="showSection('sec-new-application')">+ নতুন আবেদন</button>
+        </div>
+
+        <div class="card" style="margin-bottom:16px; padding:16px 20px; background: white">
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <input style="flex:1; min-width:200px; padding:9px 14px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit" placeholder="🔍 নাম বা মোবাইল নম্বর দিয়ে খুঁজুন...">
+            <select style="padding:9px 14px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit">
+              <option>সব ধরন</option>
+              <option>নতুন নিয়মিত</option>
+              <option>নতুন এক্সপ্রেস</option>
+              <option>রিইস্যু নিয়মিত</option>
+              <option>রিইস্যু এক্সপ্রেস</option>
+            </select>
+            <select style="padding:9px 14px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit">
+              <option>সব অবস্থা</option>
+              <option>প্রক্রিয়াধীন</option>
+              <option>সম্পন্ন</option>
+              <option>ডেলিভারি</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="data-table">
+            <thead>
+              <tr><th>সিরিয়াল</th><th>নাম ও মোবাইল</th><th>পিতা/মাতা</th><th>ধরন</th><th>জন্মতারিখ</th><th>পরিমাণ</th><th>অবস্থা</th><th>ক্রিয়া</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>2818</strong></td>
+                <td><div style="font-weight:600">করিম মিয়া</div><div style="font-size:12px; color:var(--muted)">01711-234567</div></td>
+                <td style="font-size:13px">আব্দুল করিম</td>
+                <td><span class="badge badge-pending">নিয়মিত</span></td>
+                <td style="font-size:13px">১৫/০৫/১৯৯০</td>
+                <td><strong>৳৫,৭৫০</strong></td>
+                <td><span class="badge badge-pending">প্রক্রিয়াধীন</span></td>
+                <td><button class="btn btn-sm btn-outline">বিস্তারিত</button></td>
+              </tr>
+              <tr>
+                <td><strong>2817</strong></td>
+                <td><div style="font-weight:600">রহিমা বেগম</div><div style="font-size:12px; color:var(--muted)">01812-345678</div></td>
+                <td style="font-size:13px">মো. রহিম</td>
+                <td><span class="badge badge-done">এক্সপ্রেস</span></td>
+                <td style="font-size:13px">২২/১১/১৯৮৫</td>
+                <td><strong>৳৮,০৫০</strong></td>
+                <td><span class="badge badge-active">সম্পন্ন</span></td>
+                <td><button class="btn btn-sm btn-outline">বিস্তারিত</button></td>
+              </tr>
+              <tr>
+                <td><strong>2816</strong></td>
+                <td><div style="font-weight:600">আব্দুল হক</div><div style="font-size:12px; color:var(--muted)">01933-456789</div></td>
+                <td style="font-size:13px">হাশেম মিয়া</td>
+                <td><span class="badge badge-active">সুপার এক্সপ্রেস</span></td>
+                <td style="font-size:13px">০৩/০৭/১৯৯৮</td>
+                <td><strong>৳১০,৩৫০</strong></td>
+                <td><span class="badge badge-done">ডেলিভারি</span></td>
+                <td><button class="btn btn-sm btn-outline">বিস্তারিত</button></td>
+              </tr>
+              <tr>
+                <td><strong>2814</strong></td>
+                <td><div style="font-weight:600">সালমা খানম</div><div style="font-size:12px; color:var(--muted)">01612-789012</div></td>
+                <td style="font-size:13px">জালাল উদ্দিন</td>
+                <td><span class="badge badge-pending">নিয়মিত</span></td>
+                <td style="font-size:13px">১৮/০৩/১৯৯২</td>
+                <td><strong>৳৪,০২৫</strong></td>
+                <td><span class="badge badge-pending">অপেক্ষমান</span></td>
+                <td><button class="btn btn-sm btn-outline">বিস্তারিত</button></td>
+              </tr>
+              <tr>
+                <td><strong>2813</strong></td>
+                <td><div style="font-weight:600">মোস্তফা আলী</div><div style="font-size:12px; color:var(--muted)">01755-890123</div></td>
+                <td style="font-size:13px">সিরাজ মিয়া</td>
+                <td><span class="badge badge-reject">রিইস্যু</span></td>
+                <td style="font-size:13px">৩০/০৯/১৯৮০</td>
+                <td><strong>৳৬,৩২৫</strong></td>
+                <td><span class="badge badge-active">প্রক্রিয়াধীন</span></td>
+                <td><button class="btn btn-sm btn-outline">বিস্তারিত</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- New Application -->
+      <div class="section" id="sec-new-application">
+        <div class="page-header">
+          <div>
+            <div class="page-title">➕ নতুন আবেদন এন্ট্রি</div>
+            <div class="page-sub">পাসপোর্ট আবেদনকারীর তথ্য প্রবেশ করুন</div>
+          </div>
+          <button class="btn btn-outline" onclick="showSection('sec-applications')">← ফিরে যান</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">👤 ব্যক্তিগত তথ্য</span></div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-field">
+                <label>পূর্ণ নাম (বাংলা)</label>
+                <input type="text" placeholder="যেমন: মো. করিম উদ্দিন">
+              </div>
+              <div class="form-field">
+                <label>মোবাইল নম্বর</label>
+                <input type="text" placeholder="01XXXXXXXXX">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>পিতার নাম</label>
+                <input type="text" placeholder="পিতার পূর্ণ নাম">
+              </div>
+              <div class="form-field">
+                <label>মাতার নাম</label>
+                <input type="text" placeholder="মাতার পূর্ণ নাম">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>ঠিকানা</label>
+                <input type="text" placeholder="গ্রাম, ইউনিয়ন, উপজেলা">
+              </div>
+              <div class="form-field">
+                <label>থানা</label>
+                <input type="text" placeholder="থানার নাম">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>জন্মতারিখ</label>
+                <input type="date">
+              </div>
+              <div class="form-field">
+                <label>বৈবাহিক অবস্থা</label>
+                <select>
+                  <option>অবিবাহিত</option>
+                  <option>বিবাহিত</option>
+                  <option>বিধবা/বিপত্নীক</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">📝 পাসপোর্ট সংক্রান্ত তথ্য</span></div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-field">
+                <label>পাসপোর্টের ধরন</label>
+                <select>
+                  <option>নতুন নিয়মিত (New Regular)</option>
+                  <option>নতুন এক্সপ্রেস (New Express)</option>
+                  <option>রিইস্যু নিয়মিত (Reissue Regular)</option>
+                  <option>রিইস্যু এক্সপ্রেস (Reissue Express)</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>মেয়াদ ও পৃষ্ঠা</label>
+                <select>
+                  <option>৫ বছর • ৪৮ পৃষ্ঠা — ৳৪,০২৫</option>
+                  <option>১০ বছর • ৪৮ পৃষ্ঠা — ৳৫,৭৫০</option>
+                  <option>৫ বছর • ৬৪ পৃষ্ঠা — ৳৬,৩২৫</option>
+                  <option>১০ বছর • ৬৪ পৃষ্ঠা — ৳৮,০৫০</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>NID নম্বর</label>
+                <input type="text" placeholder="জাতীয় পরিচয়পত্র নম্বর">
+              </div>
+              <div class="form-field">
+                <label>পুরানো পাসপোর্ট নম্বর (রিইস্যু হলে)</label>
+                <input type="text" placeholder="পুরানো পাসপোর্ট নম্বর">
+              </div>
+            </div>
+            <div class="form-field">
+              <label>সমস্যার বিবরণ / মন্তব্য</label>
+              <textarea rows="3" placeholder="কোনো বিশেষ সমস্যা বা নির্দেশনা থাকলে লিখুন..."></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>এন্ট্রি করেছেন</label>
+                <input type="text" placeholder="কর্মীর নাম">
+              </div>
+              <div class="form-field">
+                <label>আবেদনের তারিখ</label>
+                <input type="date">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; justify-content:flex-end">
+          <button class="btn btn-outline">খসড়া সংরক্ষণ</button>
+          <button class="btn btn-primary">✅ সাবমিট করুন</button>
+        </div>
+      </div>
+
+      <!-- NID Section -->
+      <div class="section" id="sec-nid">
+        <div class="page-header">
+          <div>
+            <div class="page-title">🪪 NID ব্যবস্থাপনা</div>
+            <div class="page-sub">জাতীয় পরিচয়পত্র আবেদনের তালিকা</div>
+          </div>
+          <button class="btn btn-primary">+ নতুন NID এন্ট্রি</button>
+        </div>
+
+        <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr)">
+          <div class="stat-card blue"><div class="stat-icon">🗺️</div><div class="stat-num">48</div><div class="stat-label">বরুড়া</div></div>
+          <div class="stat-card green"><div class="stat-icon">🗺️</div><div class="stat-num">32</div><div class="stat-label">লাকসাম</div></div>
+          <div class="stat-card gold"><div class="stat-icon">🗺️</div><div class="stat-num">19</div><div class="stat-label">লালমাই</div></div>
+          <div class="stat-card red"><div class="stat-icon">🗺️</div><div class="stat-num">28</div><div class="stat-label">কুমিল্লা</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">সকল NID আবেদন</span></div>
+          <table class="data-table">
+            <thead>
+              <tr><th>সিরিয়াল</th><th>নাম</th><th>এলাকা</th><th>মিটিং সময়</th><th>সমস্যা</th><th>অবস্থা</th><th>পরিমাণ</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>706</td><td>হাসান মিয়া</td><td>বরুড়া</td><td>২০-০৮-২৫</td><td>নতুন ভোটার</td><td><span class="badge badge-active">সম্পন্ন</span></td><td>৳১,৫০০</td></tr>
+              <tr><td>720</td><td>নাসিমা বেগম</td><td>বরুড়া</td><td>১০-০৪</td><td>সংশোধন</td><td><span class="badge badge-pending">প্রক্রিয়াধীন</span></td><td>৳২,০০০</td></tr>
+              <tr><td>721</td><td>রফিক উদ্দিন</td><td>লাকসাম</td><td>৩০-০৪-২০২৬</td><td>নতুন</td><td><span class="badge badge-pending">অপেক্ষমান</span></td><td>৳১,৫০০</td></tr>
+              <tr><td>726</td><td>মর্জিনা বেগম</td><td>লাকসাম</td><td>—</td><td>জন্মতারিখ সংশোধন</td><td><span class="badge badge-done">সম্পন্ন</span></td><td>৳২,৫০০</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Driving License -->
+      <div class="section" id="sec-driving">
+        <div class="page-header">
+          <div>
+            <div class="page-title">🚗 ড্রাইভিং লাইসেন্স</div>
+            <div class="page-sub">ড্রাইভিং লাইসেন্স আবেদনের ব্যবস্থাপনা</div>
+          </div>
+          <button class="btn btn-primary">+ নতুন এন্ট্রি</button>
+        </div>
+
+        <div class="info-box">
+          📌 <strong>অপেশাদার লাইসেন্স:</strong> ন্যূনতম বয়স ১৮ বছর &nbsp;|&nbsp; <strong>পেশাদার লাইসেন্স:</strong> ন্যূনতম বয়স ২১ বছর
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">ফি কাঠামো</span></div>
+          <div class="card-body">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px">
+              <div style="background: var(--green-light); padding:16px; border-radius:var(--radius-sm); border:1px solid #b8dfc8">
+                <div style="font-weight:700; margin-bottom:10px; color:var(--green)">পেশাদার (Professional)</div>
+                <div style="font-size:14px; line-height:2">১ ক্যাটাগরি (হালকা): ৳৮,৫০০<br>২ ক্যাটাগরি (হালকা+মোটর): ৳৯,০০০</div>
+              </div>
+              <div style="background: var(--blue-light); padding:16px; border-radius:var(--radius-sm); border:1px solid #b3d4f5">
+                <div style="font-weight:700; margin-bottom:10px; color:var(--blue)">অপেশাদার (Non-Professional)</div>
+                <div style="font-size:14px; line-height:2">১ ক্যাটাগরি (হালকা): ৳১০,০০০<br>২ ক্যাটাগরি (হালকা+মোটর): ৳১০,৫০০</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>সিরিয়াল</th><th>নাম</th><th>ধরন</th><th>ক্যাটাগরি</th><th>পরিমাণ</th><th>অবস্থা</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>মাহমুদ হোসেন</td><td>পেশাদার</td><td>১ (হালকা)</td><td>৳৮,৫০০</td><td><span class="badge badge-active">সম্পন্ন</span></td></tr>
+              <tr><td>2</td><td>শাহিন আলম</td><td>অপেশাদার</td><td>২ (হালকা+মোটর)</td><td>৳১০,৫০০</td><td><span class="badge badge-pending">প্রক্রিয়াধীন</span></td></tr>
+              <tr><td>3</td><td>রাবেয়া খাতুন</td><td>অপেশাদার</td><td>১ (হালকা)</td><td>৳১০,০০০</td><td><span class="badge badge-done">পরীক্ষা বাকি</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Reports (Admin) -->
+      <div class="section" id="sec-reports">
+        <div class="page-header">
+          <div>
+            <div class="page-title">📈 রিপোর্ট ও পরিসংখ্যান</div>
+            <div class="page-sub">মাসিক ও বার্ষিক আয়-ব্যয়ের হিসাব</div>
+          </div>
+          <button class="btn btn-primary">⬇️ রিপোর্ট ডাউনলোড</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card green"><div class="stat-icon">📅</div><div class="stat-num">৳৪.২ লাখ</div><div class="stat-label">এই মাসের আয়</div></div>
+          <div class="stat-card blue"><div class="stat-icon">📊</div><div class="stat-num">১২৪</div><div class="stat-label">এই মাসের আবেদন</div></div>
+          <div class="stat-card gold"><div class="stat-icon">💹</div><div class="stat-num">৳৩৪,২০০</div><div class="stat-label">নেট লাভ</div></div>
+          <div class="stat-card red"><div class="stat-icon">❌</div><div class="stat-num">৭</div><div class="stat-label">প্রত্যাখ্যাত</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">মাসভিত্তিক সারাংশ</span></div>
+          <div class="card-body" style="padding:0">
+            <table class="data-table">
+              <thead><tr><th>মাস</th><th>আবেদন</th><th>সম্পন্ন</th><th>মোট আয়</th><th>খরচ</th><th>লাভ</th></tr></thead>
+              <tbody>
+                <tr><td>সেপ্টেম্বর</td><td>98</td><td>91</td><td>৳৩,৮২,৫০০</td><td>৳৩৪,৪০০</td><td style="color:var(--green); font-weight:700">৳৩,৪৮,১০০</td></tr>
+                <tr><td>অক্টোবর</td><td>112</td><td>108</td><td>৳৪,১২,০০০</td><td>৳৩৮,২০০</td><td style="color:var(--green); font-weight:700">৳৩,৭৩,৮০০</td></tr>
+                <tr><td>নভেম্বর</td><td>87</td><td>82</td><td>৳৩,২৫,৫০০</td><td>৳২৯,১০০</td><td style="color:var(--green); font-weight:700">৳২,৯৬,৪০০</td></tr>
+                <tr><td>ডিসেম্বর</td><td>124</td><td>117</td><td>৳৪,৬২,৮০০</td><td>৳৪১,৫০০</td><td style="color:var(--green); font-weight:700">৳৪,২১,৩০০</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users Management (Admin only) -->
+      <div class="section" id="sec-users">
+        <div class="page-header">
+          <div>
+            <div class="page-title">👥 ব্যবহারকারী ব্যবস্থাপনা</div>
+            <div class="page-sub">স্টাফ ও ব্যবহারকারীদের অ্যাকাউন্ট পরিচালনা</div>
+          </div>
+          <button class="btn btn-primary">+ নতুন ব্যবহারকারী</button>
+        </div>
+
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>নাম</th><th>ব্যবহারকারীর নাম</th><th>ভূমিকা</th><th>এলাকা</th><th>অবস্থা</th><th>ক্রিয়া</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>সালেহা ম্যাডাম</strong></td>
+                <td>saleha_admin</td>
+                <td><span class="badge badge-reject">সুপার অ্যাডমিন</span></td>
+                <td>ঢাকা হেড অফিস</td>
+                <td><span class="badge badge-active">সক্রিয়</span></td>
+                <td><button class="btn btn-sm btn-outline">সম্পাদনা</button></td>
+              </tr>
+              <tr>
+                <td><strong>রাসেল মামা</strong></td>
+                <td>rasel_operator</td>
+                <td><span class="badge badge-done">অপারেটর</span></td>
+                <td>বরুড়া</td>
+                <td><span class="badge badge-active">সক্রিয়</span></td>
+                <td><button class="btn btn-sm btn-outline">সম্পাদনা</button></td>
+              </tr>
+              <tr>
+                <td><strong>শিমুল</strong></td>
+                <td>shimul_staff</td>
+                <td><span class="badge badge-pending">স্টাফ</span></td>
+                <td>লাকসাম</td>
+                <td><span class="badge badge-active">সক্রিয়</span></td>
+                <td><button class="btn btn-sm btn-outline">সম্পাদনা</button></td>
+              </tr>
+              <tr>
+                <td><strong>রনি</strong></td>
+                <td>rony_user</td>
+                <td><span class="badge badge-pending">ইউজার</span></td>
+                <td>কুমিল্লা</td>
+                <td><span class="badge badge-pending">নিষ্ক্রিয়</span></td>
+                <td><button class="btn btn-sm btn-outline">সম্পাদনা</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ====== USER SECTIONS ====== -->
+
+      <!-- User Dashboard -->
+      <div class="section" id="sec-user-dashboard">
+        <div class="page-header">
+          <div>
+            <div class="page-title">🏠 আমার ড্যাশবোর্ড</div>
+            <div class="page-sub">আপনার আবেদনের সামগ্রিক অবস্থা</div>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          ⚠️ আপনার ২টি আবেদন প্রক্রিয়াধীন আছে। মিটিং সময়: <strong>০৩-০৫-২০২৬</strong>
+        </div>
+
+        <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr)">
+          <div class="stat-card green"><div class="stat-icon">📋</div><div class="stat-num">3</div><div class="stat-label">মোট আবেদন</div></div>
+          <div class="stat-card gold"><div class="stat-icon">⏳</div><div class="stat-num">2</div><div class="stat-label">প্রক্রিয়াধীন</div></div>
+          <div class="stat-card blue"><div class="stat-icon">✅</div><div class="stat-num">1</div><div class="stat-label">সম্পন্ন</div></div>
+          <div class="stat-card red"><div class="stat-icon">💰</div><div class="stat-num">৳১৪,৩৫০</div><div class="stat-label">মোট পরিশোধিত</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">📦 পাসপোর্ট স্ট্যাটাস ট্র্যাকার</span></div>
+          <div class="card-body">
+            <div style="font-size:14px; margin-bottom:4px"><strong>আবেদন #2814</strong> — সালমা খানম</div>
+            <div style="font-size:13px; color:var(--muted); margin-bottom:16px">১০ বছর, ৪৮ পৃষ্ঠা • নিয়মিত ডেলিভারি</div>
+
+            <div class="tracker">
+              <div class="tracker-step done">
+                <div class="tracker-dot">✓</div>
+                <div class="tracker-label">আবেদন জমা</div>
+              </div>
+              <div class="tracker-step done">
+                <div class="tracker-dot">✓</div>
+                <div class="tracker-label">ফি প্রদান</div>
+              </div>
+              <div class="tracker-step active">
+                <div class="tracker-dot">→</div>
+                <div class="tracker-label">প্রক্রিয়াকরণ</div>
+              </div>
+              <div class="tracker-step">
+                <div class="tracker-dot">4</div>
+                <div class="tracker-label">পুলিশ ভেরিফিকেশন</div>
+              </div>
+              <div class="tracker-step">
+                <div class="tracker-dot">5</div>
+                <div class="tracker-label">মুদ্রণ</div>
+              </div>
+              <div class="tracker-step">
+                <div class="tracker-dot">6</div>
+                <div class="tracker-label">ডেলিভারি</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Apply -->
+      <div class="section" id="sec-user-apply">
+        <div class="page-header">
+          <div>
+            <div class="page-title">📝 নতুন আবেদন করুন</div>
+            <div class="page-sub">পাসপোর্ট সার্ভিসের জন্য আবেদন করুন</div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          ℹ️ আবেদন জমা দেওয়ার পর আমাদের টিম আপনার সাথে যোগাযোগ করবে। মিটিং সময় নির্ধারণ করা হবে।
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">সার্ভিস নির্বাচন করুন</span></div>
+          <div class="card-body">
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-bottom:20px">
+              <div onclick="selectService(this)" style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:16px; cursor:pointer; text-align:center; transition:all 0.2s">
+                <div style="font-size:28px; margin-bottom:8px">📗</div>
+                <div style="font-weight:700; font-size:14px">পাসপোর্ট</div>
+                <div style="font-size:12px; color:var(--muted)">নতুন বা রিইস্যু</div>
+              </div>
+              <div onclick="selectService(this)" style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:16px; cursor:pointer; text-align:center; transition:all 0.2s">
+                <div style="font-size:28px; margin-bottom:8px">🪪</div>
+                <div style="font-weight:700; font-size:14px">NID সংশোধন</div>
+                <div style="font-size:12px; color:var(--muted)">জাতীয় পরিচয়পত্র</div>
+              </div>
+              <div onclick="selectService(this)" style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:16px; cursor:pointer; text-align:center; transition:all 0.2s">
+                <div style="font-size:28px; margin-bottom:8px">🚗</div>
+                <div style="font-weight:700; font-size:14px">ড্রাইভিং লাইসেন্স</div>
+                <div style="font-size:12px; color:var(--muted)">পেশাদার/অপেশাদার</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>আপনার পূর্ণ নাম</label>
+                <input type="text" placeholder="পূর্ণ নাম লিখুন">
+              </div>
+              <div class="form-field">
+                <label>মোবাইল নম্বর</label>
+                <input type="text" placeholder="01XXXXXXXXX">
+              </div>
+            </div>
+            <div class="form-field">
+              <label>বিস্তারিত সমস্যা বা চাহিদা</label>
+              <textarea rows="3" placeholder="আপনার প্রয়োজনীয়তা বা সমস্যা বিস্তারিত লিখুন..."></textarea>
+            </div>
+            <button class="btn btn-primary" style="width:100%; padding:14px; font-size:15px">📤 আবেদন পাঠান</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Status -->
+      <div class="section" id="sec-user-status">
+        <div class="page-header">
+          <div>
+            <div class="page-title">🔍 আবেদনের অবস্থা</div>
+            <div class="page-sub">আপনার সকল আবেদনের বর্তমান অবস্থা</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>সিরিয়াল</th><th>সার্ভিস</th><th>আবেদনের তারিখ</th><th>ফি</th><th>অবস্থা</th><th>ডেলিভারি তারিখ</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>2814</strong></td>
+                <td>পাসপোর্ট (নিয়মিত)</td>
+                <td>১২/০৩/২০২৬</td>
+                <td>৳৪,০২৫</td>
+                <td><span class="badge badge-pending">প্রক্রিয়াধীন</span></td>
+                <td style="color:var(--muted)">অনির্ধারিত</td>
+              </tr>
+              <tr>
+                <td><strong>NID-229</strong></td>
+                <td>NID সংশোধন</td>
+                <td>০৫/০২/২০২৬</td>
+                <td>৳২,০০০</td>
+                <td><span class="badge badge-active">সম্পন্ন</span></td>
+                <td style="color:var(--green); font-weight:600">১০/০৩/২০২৬</td>
+              </tr>
+              <tr>
+                <td><strong>DL-08</strong></td>
+                <td>ড্রাইভিং লাইসেন্স</td>
+                <td>১৮/১২/২০২৫</td>
+                <td>৳৮,৩২৫</td>
+                <td><span class="badge badge-done">ডেলিভারি</span></td>
+                <td style="color:var(--green); font-weight:600">২২/০১/২০২৬</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- User Contact -->
+      <div class="section" id="sec-user-contact">
+        <div class="page-header">
+          <div>
+            <div class="page-title">📞 যোগাযোগ</div>
+            <div class="page-sub">আমাদের প্রতিনিধিদের সাথে যোগাযোগ করুন</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px">
+          <div class="card">
+            <div class="card-header"><span class="card-title">📍 বরুড়া অফিস</span></div>
+            <div class="card-body">
+              <div style="font-size:14px; line-height:2; color:var(--muted)">
+                <div>📞 <strong style="color:var(--text)">নাজমল ভাই</strong> — ০১৭৭১-৩০১৪৯৮</div>
+                <div>📞 bKash: ০১৮১৫-৫৮০৫২৮</div>
+                <div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--border)">⏰ সোম ও বৃহস্পতি খোলা</div>
+                <div>💰 রেট: ১,৫০০ টাকা</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">📍 ঢাকা হেড অফিস</span></div>
+            <div class="card-body">
+              <div style="font-size:14px; line-height:2; color:var(--muted)">
+                <div>📞 <strong style="color:var(--text)">সালেহা ম্যাডাম</strong></div>
+                <div>📞 ০১৫৫৪-৭১৪৫৩৮</div>
+                <div>📞 ০১৯২৬-৫০৪০৫৬</div>
+                <div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--border)">🏛️ আগারগাঁও পাসপোর্ট অফিস</div>
+                <div>5th Floor, 5th Counter, 2nd Gate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-title">💬 বার্তা পাঠান</span></div>
+          <div class="card-body">
+            <div class="form-field">
+              <label>বিষয়</label>
+              <input type="text" placeholder="আপনার বার্তার বিষয়">
+            </div>
+            <div class="form-field">
+              <label>বার্তা</label>
+              <textarea rows="4" placeholder="আপনার প্রশ্ন বা সমস্যা বিস্তারিত লিখুন..."></textarea>
+            </div>
+            <button class="btn btn-primary">📤 বার্তা পাঠান</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main-content -->
+  </div><!-- /app-layout -->
+</div><!-- /app -->
+
+<script>
+let currentRole = 'admin';
+
+const adminMenus = [
+  { label: 'ড্যাশবোর্ড', section: 'sec-dashboard', icon: '📊', group: 'মূল মেনু' },
+  { label: 'পাসপোর্ট আবেদন', section: 'sec-applications', icon: '📋', group: 'মূল মেনু' },
+  { label: 'নতুন আবেদন', section: 'sec-new-application', icon: '➕', group: 'মূল মেনু' },
+  { label: 'NID ব্যবস্থাপনা', section: 'sec-nid', icon: '🪪', group: 'সেবাসমূহ' },
+  { label: 'ড্রাইভিং লাইসেন্স', section: 'sec-driving', icon: '🚗', group: 'সেবাসমূহ' },
+  { label: 'রিপোর্ট', section: 'sec-reports', icon: '📈', group: 'বিশ্লেষণ' },
+  { label: 'ব্যবহারকারী', section: 'sec-users', icon: '👥', group: 'বিশ্লেষণ' },
+];
+
+const userMenus = [
+  { label: 'আমার ড্যাশবোর্ড', section: 'sec-user-dashboard', icon: '🏠', group: 'মূল মেনু' },
+  { label: 'নতুন আবেদন', section: 'sec-user-apply', icon: '📝', group: 'আবেদন' },
+  { label: 'আবেদনের অবস্থা', section: 'sec-user-status', icon: '🔍', group: 'আবেদন' },
+  { label: 'যোগাযোগ', section: 'sec-user-contact', icon: '📞', group: 'সহায়তা' },
+];
+
+function switchRole(role) {
+  currentRole = role;
+  document.querySelectorAll('.role-tab').forEach((t, i) => {
+    t.classList.toggle('active', (role === 'admin' && i === 0) || (role === 'user' && i === 1));
+  });
+  document.getElementById('username').value = role === 'admin' ? 'admin' : 'user1';
+  document.getElementById('password').value = role === 'admin' ? 'admin123' : 'user123';
+}
+
+function doLogin() {
+  const u = document.getElementById('username').value;
+  const p = document.getElementById('password').value;
+
+  let role = null;
+  if ((u === 'admin') && p === 'admin123') role = 'admin';
+  else if ((u === 'user1' || u === 'user') && p === 'user123') role = 'user';
+  
+  if (!role) { alert('ভুল ইউজারনেম বা পাসওয়ার্ড!'); return; }
+
+  currentRole = role;
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+
+  const badge = document.getElementById('role-badge');
+  const avatar = document.getElementById('user-avatar');
+  badge.textContent = role === 'admin' ? 'ADMIN' : 'USER';
+  badge.className = 'role-badge ' + role;
+  avatar.textContent = role === 'admin' ? 'A' : 'U';
+  document.getElementById('topbar-sub').textContent = role === 'admin' ? 'Admin Panel • Full Access' : 'User Portal • Limited Access';
+
+  buildSidebar(role);
+  const firstMenu = role === 'admin' ? 'sec-dashboard' : 'sec-user-dashboard';
+  showSection(firstMenu);
+}
+
+function buildSidebar(role) {
+  const menus = role === 'admin' ? adminMenus : userMenus;
+  const sidebar = document.getElementById('sidebar');
+  const groups = {};
+  menus.forEach(m => {
+    if (!groups[m.group]) groups[m.group] = [];
+    groups[m.group].push(m);
+  });
+
+  sidebar.innerHTML = '';
+  Object.entries(groups).forEach(([group, items]) => {
+    const sec = document.createElement('div');
+    sec.className = 'sidebar-section';
+    sec.innerHTML = `<div class="sidebar-label">${group}</div>` +
+      items.map(item => 
+        `<div class="nav-item" id="nav-${item.section}" onclick="showSection('${item.section}')">
+          <span class="nav-icon">${item.icon}</span>${item.label}
+        </div>`
+      ).join('');
+    sidebar.appendChild(sec);
+  });
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  const nav = document.getElementById('nav-' + id);
+  if (nav) nav.classList.add('active');
+}
+
+function logout() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  switchRole('admin');
+}
+
+function selectService(el) {
+  document.querySelectorAll('[onclick="selectService(this)"]').forEach(e => {
+    e.style.border = '2px solid var(--border)';
+    e.style.background = '';
+  });
+  el.style.border = '2px solid var(--green)';
+  el.style.background = 'var(--green-light)';
+}
+</script>
+</body>
+</html>
